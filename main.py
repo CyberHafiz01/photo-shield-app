@@ -3,27 +3,18 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Buildozer and Dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good libsqlite3-dev sqlite3 bzip2 libbz2-dev libssl-dev openssl libffi-dev liblzma-dev
-          pip install --upgrade pip
-          pip install buildozer cython virtualenv
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        run: |
-          # هنا نقوم بالبناء يدوياً لنتجنب مشاكل الروابط الخارجية
-          buildozer android clean debug
-        
+        # استخدمنا هنا النسخة المستقرة والمباشرة
+        uses: ArtemSBulat/buildozer-action@v1
+        with:
+          command: buildozer android clean debug
+          buildozer_version: master
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
