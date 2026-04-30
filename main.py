@@ -9,8 +9,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # استخدمنا هنا النسخة المستقرة والمباشرة
-        uses: ArtemSBulat/buildozer-action@v1
+        # هذا هو التعديل الجوهري ليتخطى الخطأ الذي يظهر لك
+        uses: ArtemSBulat/buildozer-action@v1.2
         with:
           command: buildozer android clean debug
           buildozer_version: master
