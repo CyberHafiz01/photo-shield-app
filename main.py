@@ -1,19 +1,15 @@
 name: Build APK
 on: [push]
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Build with Buildozer
         uses: kivy/buildozer-action@master
         with:
           command: buildozer android debug
           buildozer_version: master
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
