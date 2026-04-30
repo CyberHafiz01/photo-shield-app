@@ -1,12 +1,12 @@
-
-name: Final Build
+name: Build APK
 on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04  # هذا هو السر، نظام مستقر جداً
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
         uses: kivy/buildozer-action@master
@@ -17,5 +17,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Fixed-APK
+          name: my-app-apk
           path: bin/*.apk
